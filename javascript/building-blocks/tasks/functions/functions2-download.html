@@ -41,11 +41,30 @@
     const height = 75;
     const color = 'blue';
 
-    // Add your code here
+    canvas.width = width;
+    canvas.height = height;
 
-    // Don't edit the code below here!
+    function random(number) {
+      return Math.floor(Math.random() * number);
+    }
 
+    function draw() {
+      ctx.clearRect(x, y, canvas.width, canvas.height);
+      ctx.beginPath();
+      ctx.fillStyle = "rgb(255 0 0 / 50%)";
+      ctx.arc(
+        random(canvas.width),
+        random(canvas.height),
+        random(50),
+        0,
+        2 * Math.PI,
+      );
+      ctx.fill();
+}
     const section = document.querySelector('section');
+
+    draw();
+
   </script>
 
 </html>

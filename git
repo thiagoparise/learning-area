@@ -1,0 +1,411 @@
+[1mdiff --git a/javascript/building-blocks/functions/function-library.html b/javascript/building-blocks/functions/function-library.html[m
+[1mindex b29070f..4b7014f 100644[m
+[1m--- a/javascript/building-blocks/functions/function-library.html[m
+[1m+++ b/javascript/building-blocks/functions/function-library.html[m
+[36m@@ -20,6 +20,41 @@[m
+     const input = document.querySelector('.numberInput');[m
+     const para = document.querySelector('p');[m
+ [m
+[32m+[m[32m    function squaredroot(num){[m
+[32m+[m[32m      return Math.sqrt(num);[m
+[32m+[m[32m    }[m
+[32m+[m
+[32m+[m[32m    function squared(num) {[m
+[32m+[m[32m      return num * num;[m
+[32m+[m[32m    }[m
+[32m+[m
+[32m+[m[32m    function cubed(num) {[m
+[32m+[m[32m      return num * num * num;[m
+[32m+[m[32m    }[m
+[32m+[m
+[32m+[m[32m    function factorial(num) {[m
+[32m+[m[32m      if (num < 0) return undefined;[m
+[32m+[m[32m      if (num === 0) return 1;[m
+[32m+[m[32m      let x = num - 1;[m
+[32m+[m[32m      while (x > 1) {[m
+[32m+[m[32m        num *= x;[m
+[32m+[m[32m        x--;[m
+[32m+[m[32m      }[m
+[32m+[m[32m      return num;[m
+[32m+[m[32m    }[m
+[32m+[m[32m    input.addEventListener("change", () => {[m
+[32m+[m[32m      const num = parseFloat(input.value);[m
+[32m+[m[32m      if (isNaN(num)) {[m
+[32m+[m[32m        para.textContent = "You need to enter a number!";[m
+[32m+[m[32m      } else {[m
+[32m+[m[32m        para.textContent = `${num} squared is ${squared(num)}. `;[m
+[32m+[m[32m        para.textContent += `${num} cubed is ${cubed(num)}. `;[m
+[32m+[m[32m        para.textContent += `${num} factorial is ${factorial(num)}. `;[m
+[32m+[m[32m        para.textContent += `${num} square root is ${squaredroot(num)}`;[m
+[32m+[m[32m      }[m
+[32m+[m[32m    });[m
+[32m+[m
+[32m+[m
+   </script>[m
+ </body>[m
+ </html>[m
+[1mdiff --git a/javascript/building-blocks/functions/function-scope.html b/javascript/building-blocks/functions/function-scope.html[m
+[1mindex 4827a74..acf02c9 100644[m
+[1m--- a/javascript/building-blocks/functions/function-scope.html[m
+[1m+++ b/javascript/building-blocks/functions/function-scope.html[m
+[36m@@ -12,10 +12,12 @@[m
+ [m
+     function a() {[m
+       const y = 2;[m
+[32m+[m[32m      output(z);[m
+     }[m
+ [m
+     function b() {[m
+       const z = 3;[m
+[32m+[m[32m      output(z);[m
+     }[m
+ [m
+     function output(value) {[m
+[1mdiff --git a/javascript/building-blocks/functions/function-start.html b/javascript/building-blocks/functions/function-start.html[m
+[1mindex 6b35ad3..b647db1 100644[m
+[1m--- a/javascript/building-blocks/functions/function-start.html[m
+[1m+++ b/javascript/building-blocks/functions/function-start.html[m
+[36m@@ -10,7 +10,7 @@[m
+         top: 50%;[m
+         left: 50%;[m
+         transform: translate(-50%,-50%);[m
+[31m-        width: 200px;[m
+[32m+[m[32m        width: 242px;[m
+         background: #eee;[m
+       }[m
+ [m
+[36m@@ -18,6 +18,9 @@[m
+         line-height: 1.5;[m
+         padding: 10px 20px;[m
+         color: #333;[m
+[32m+[m[32m        padding-left: 82px;[m
+[32m+[m[32m        background-position: 25px center;[m
+[32m+[m[32m        background-repeat: no-repeat;[m
+       }[m
+ [m
+       .msgBox button {[m
+[36m@@ -36,7 +39,39 @@[m
+     <button>Display message box</button>[m
+ [m
+     <script>[m
+[31m-      [m
+[32m+[m[32m      function displayMessage(msgText, msgType){[m
+[32m+[m[32m        const body = document.body;[m
+[32m+[m
+[32m+[m[32m        const panel = document.createElement("div");[m
+[32m+[m[32m        panel.setAttribute("class", "msgBox");[m
+[32m+[m[32m        body.appendChild(panel);[m
+[32m+[m
+[32m+[m[32m        const msg = document.createElement("p");[m
+[32m+[m[32m        msg.textContent = msgText;[m
+[32m+[m[32m        panel.appendChild(msg);[m
+[32m+[m
+[32m+[m[32m        if(msgType === "warning"){[m
+[32m+[m[32m          panel.style.backgroundColor = "red";[m
+[32m+[m[32m          msg.style.backgroundImage = "icons/warning.png";[m
+[32m+[m[32m        }else if(msgType === "chat"){[m
+[32m+[m[32m          panel.style.backgroundColor = "aqua";[m
+[32m+[m[32m          msg.style.backgroundImage = "icons/chat.png";[m
+[32m+[m[32m        }else{[m
+[32m+[m[32m          msg.style.paddingLeft = "10px";[m
+[32m+[m[32m        }[m
+[32m+[m
+[32m+[m[32m        const closeBtn = document.createElement("button");[m
+[32m+[m[32m        closeBtn.textContent = "x";[m
+[32m+[m[32m        panel.appendChild(closeBtn);[m
+[32m+[m
+[32m+[m[32m        closeBtn.addEventListener("click", () =>[m
+[32m+[m[32m          panel.parentNode.removeChild(panel),[m
+[32m+[m[32m        );[m
+[32m+[m[32m      }[m
+[32m+[m
+[32m+[m[32m      const btn = document.querySelector("button");[m
+[32m+[m[32m      btn.addEventListener("click", () => displayMessage("Brian: Hi there, how are you today?", "chat"));[m
+[32m+[m
+     </script>[m
+   </body>[m
+ </html>[m
+\ No newline at end of file[m
+[1mdiff --git a/javascript/building-blocks/tasks/functions/functions1-download.html b/javascript/building-blocks/tasks/functions/functions1-download.html[m
+[1mindex ffa858b..5f43539 100644[m
+[1m--- a/javascript/building-blocks/tasks/functions/functions1-download.html[m
+[1m+++ b/javascript/building-blocks/tasks/functions/functions1-download.html[m
+[36m@@ -29,13 +29,17 @@[m
+     const names = ['Chris', 'Li Kang', 'Anne', 'Francesca', 'Mustafa', 'Tina', 'Bert', 'Jada'][m
+     const para = document.createElement('p');[m
+ [m
+[31m-    // Add your code here[m
+[31m-[m
+[31m-    // Don't edit the code below here![m
+[32m+[m[32m    function chooseName(){[m
+[32m+[m[32m      const index = Math.floor(Math.random()*8);[m
+[32m+[m[32m      para.textContent = names[index];[m
+[32m+[m[32m    }[m
+ [m
+     const section = document.querySelector('section');[m
+ [m
+     section.appendChild(para);[m
+[32m+[m
+[32m+[m[32m    chooseName();[m
+[32m+[m
+   </script>[m
+ [m
+ </html>[m
+[1mdiff --git a/javascript/building-blocks/tasks/functions/functions2-download.html b/javascript/building-blocks/tasks/functions/functions2-download.html[m
+[1mindex 9dace15..d248d18 100644[m
+[1m--- a/javascript/building-blocks/tasks/functions/functions2-download.html[m
+[1m+++ b/javascript/building-blocks/tasks/functions/functions2-download.html[m
+[36m@@ -41,11 +41,30 @@[m
+     const height = 75;[m
+     const color = 'blue';[m
+ [m
+[31m-    // Add your code here[m
+[32m+[m[32m    canvas.width = width;[m
+[32m+[m[32m    canvas.height = height;[m
+ [m
+[31m-    // Don't edit the code below here![m
+[32m+[m[32m    function random(number) {[m
+[32m+[m[32m      return Math.floor(Math.random() * number);[m
+[32m+[m[32m    }[m
+ [m
+[32m+[m[32m    function draw() {[m
+[32m+[m[32m      ctx.clearRect(x, y, canvas.width, canvas.height);[m
+[32m+[m[32m      ctx.beginPath();[m
+[32m+[m[32m      ctx.fillStyle = "rgb(255 0 0 / 50%)";[m
+[32m+[m[32m      ctx.arc([m
+[32m+[m[32m        random(canvas.width),[m
+[32m+[m[32m        random(canvas.height),[m
+[32m+[m[32m        random(50),[m
+[32m+[m[32m        0,[m
+[32m+[m[32m        2 * Math.PI,[m
+[32m+[m[32m      );[m
+[32m+[m[32m      ctx.fill();[m
+[32m+[m[32m}[m
+     const section = document.querySelector('section');[m
+[32m+[m
+[32m+[m[32m    draw();[m
+[32m+[m
+   </script>[m
+ [m
+ </html>[m
+[1mdiff --git a/javascript/building-blocks/tasks/functions/functions3-download.html b/javascript/building-blocks/tasks/functions/functions3-download.html[m
+[1mindex 3ff4d9f..a445549 100644[m
+[1m--- a/javascript/building-blocks/tasks/functions/functions3-download.html[m
+[1m+++ b/javascript/building-blocks/tasks/functions/functions3-download.html[m
+[36m@@ -29,13 +29,20 @@[m
+     const names = ['Chris', 'Li Kang', 'Anne', 'Francesca', 'Mustafa', 'Tina', 'Bert', 'Jada'][m
+     const para = document.createElement('p');[m
+ [m
+[31m-    // Add your code here[m
+[32m+[m[32m    function random(min, max){[m
+[32m+[m[32m      return Math.floor(Math.random()*max) + min;[m
+[32m+[m[32m    }[m
+ [m
+[31m-    // Don't edit the code below here![m
+[32m+[m[32m    function chooseName(myArray, arrayMax){[m
+[32m+[m[32m      para.textContent = myArray[random(0, arrayMax)];[m
+[32m+[m[32m    }[m
+ [m
+     const section = document.querySelector('section');[m
+ [m
+     section.appendChild(para);[m
+[32m+[m
+[32m+[m[32m    chooseName(names, names.length);[m
+[32m+[m
+   </script>[m
+ [m
+ </html>[m
+[1mdiff --git a/javascript/building-blocks/tasks/functions/functions4-download.html b/javascript/building-blocks/tasks/functions/functions4-download.html[m
+[1mindex e4c692a..fda730b 100644[m
+[1m--- a/javascript/building-blocks/tasks/functions/functions4-download.html[m
+[1m+++ b/javascript/building-blocks/tasks/functions/functions4-download.html[m
+[36m@@ -28,12 +28,8 @@[m
+   <script>[m
+     const names = ['Chris', 'Li Kang', 'Anne', 'Francesca', 'Mustafa', 'Tina', 'Bert', 'Jada'];[m
+     const para = document.createElement('p');[m
+[31m-[m
+[31m-    function isShort(name) {[m
+[31m-      return name.length < 5;[m
+[31m-    }[m
+[31m-[m
+[31m-    const shortNames = names.filter(isShort);[m
+[32m+[m[41m  [m
+[32m+[m[32m    const shortNames = names.filter(name => name.length < 5);[m
+     para.textContent = shortNames;[m
+ [m
+     // Don't edit the code below here![m
+[1mdiff --git a/javascript/introduction-to-js-1/troubleshooting/number-game-errors.html b/javascript/introduction-to-js-1/troubleshooting/number-game-errors.html[m
+[1mindex cae7f55..954f940 100644[m
+[1m--- a/javascript/introduction-to-js-1/troubleshooting/number-game-errors.html[m
+[1m+++ b/javascript/introduction-to-js-1/troubleshooting/number-game-errors.html[m
+[36m@@ -23,94 +23,94 @@[m
+   </head>[m
+ [m
+   <body>[m
+[31m-      <h1>Number guessing game</h1>[m
+[32m+[m[32m    <h1>Number guessing game</h1>[m
+ [m
+[31m-      <p>We have selected a random number between 1 and 100. See if you can guess it in 10 turns or less. We'll tell you if your guess was too high or too low.</p>[m
+[32m+[m[32m    <p>We have selected a random number between 1 and 100. See if you can guess it in 10 turns or less. We'll tell you if your guess was too high or too low.</p>[m
+ [m
+[31m-<div class="form">[m
+[31m-  <label for="guessField">Enter a guess: </label>[m
+[31m-  <input type="text" id="guessField" class="guessField">[m
+[31m-  <input type="submit" value="Submit guess" class="guessSubmit">[m
+[31m-</div>[m
+[32m+[m[32m    <div class="form">[m
+[32m+[m[32m      <label for="guessField">Enter a guess: </label>[m
+[32m+[m[32m      <input type="text" id="guessField" class="guessField">[m
+[32m+[m[32m      <input type="submit" value="Submit guess" class="guessSubmit">[m
+[32m+[m[32m    </div>[m
+ [m
+[31m-<div class="resultParas">[m
+[31m-  <p class="guesses"></p>[m
+[31m-  <p class="lastResult"></p>[m
+[31m-  <p class="lowOrHi"></p>[m
+[31m-</div>[m
+[32m+[m[32m    <div class="resultParas">[m
+[32m+[m[32m      <p class="guesses"></p>[m
+[32m+[m[32m      <p class="lastResult"></p>[m
+[32m+[m[32m      <p class="lowOrHi"></p>[m
+[32m+[m[32m    </div>[m
+ [m
+[31m-</body>[m
+[32m+[m[32m  </body>[m
+ [m
+[31m-<script>[m
+[31m-  let randomNumber = Math.floor(Math.random()) + 1;[m
+[32m+[m[32m  <script>[m
+[32m+[m[32m    let randomNumber = Math.floor(Math.random()*100) + 1;[m
+ [m
+[31m-  const guesses = document.querySelector('.guesses');[m
+[31m-  const lastResult = document.querySelector('.lastResult');[m
+[31m-  const lowOrHi = document.querySelector('lowOrHi');[m
+[31m-  const guessSubmit = document.querySelector('.guessSubmit');[m
+[31m-  const guessField = document.querySelector('.guessField');[m
+[32m+[m[32m    const guesses = document.querySelector('.guesses');[m
+[32m+[m[32m    const lastResult = document.querySelector('.lastResult');[m
+[32m+[m[32m    const lowOrHi = document.querySelector('.lowOrHi');[m
+[32m+[m[32m    const guessSubmit = document.querySelector('.guessSubmit');[m
+[32m+[m[32m    const guessField = document.querySelector('.guessField');[m
+ [m
+[31m-  let guessCount = 1;[m
+[31m-  let resetButton;[m
+[32m+[m[32m    let guessCount = 1;[m
+[32m+[m[32m    let resetButton;[m
+ [m
+[31m-  function checkGuess() {[m
+[32m+[m[32m    function checkGuess() {[m
+ [m
+[31m-    const userGuess = Number(guessField.value);[m
+[31m-    if(guessCount === 1) {[m
+[31m-      guesses.textContent = 'Previous guesses: ';[m
+[31m-    }[m
+[31m-    guesses.textContent += userGuess + ' ';[m
+[31m-[m
+[31m-    if(userGuess === randomNumber) {[m
+[31m-      lastResult.textContent = 'Congratulations! You got it right!';[m
+[31m-      lastResult.style.backgroundColor = 'green';[m
+[31m-      lowOrHi.textContent = '';[m
+[31m-      setGameOver();[m
+[31m-    } else if(guessCount === 10) {[m
+[31m-      lastResult.textContent = '!!!GAME OVER!!!';[m
+[31m-      setGameOver();[m
+[31m-    } else {[m
+[31m-      lastResult.textContent = 'Wrong!';[m
+[31m-      lastResult.style.backgroundColor = 'red';[m
+[31m-      if(userGuess < randomNumber) {[m
+[31m-        lowOrHi.textContent = 'Last guess was too low!';[m
+[31m-      } else if(userGuess > randomNumber) {[m
+[31m-        lowOrHi.textContent = 'Last guess was too high!';[m
+[32m+[m[32m      const userGuess = Number(guessField.value);[m
+[32m+[m[32m      if(guessCount === 1) {[m
+[32m+[m[32m        guesses.textContent = 'Previous guesses: ';[m
+[32m+[m[32m      }[m
+[32m+[m[32m      guesses.textContent += userGuess + ' ';[m
+[32m+[m
+[32m+[m[32m      if(userGuess === randomNumber) {[m
+[32m+[m[32m        lastResult.textContent = 'Congratulations! You got it right!';[m
+[32m+[m[32m        lastResult.style.backgroundColor = 'green';[m
+[32m+[m[32m        lowOrHi.textContent = '';[m
+[32m+[m[32m        setGameOver();[m
+[32m+[m[32m      } else if(guessCount === 10) {[m
+[32m+[m[32m        lastResult.textContent = '!!!GAME OVER!!!';[m
+[32m+[m[32m        setGameOver();[m
+[32m+[m[32m      } else {[m
+[32m+[m[32m        lastResult.textContent = 'Wrong!';[m
+[32m+[m[32m        lastResult.style.backgroundColor = 'red';[m
+[32m+[m[32m        if(userGuess < randomNumber) {[m
+[32m+[m[32m          lowOrHi.textContent = 'Last guess was too low!';[m
+[32m+[m[32m        } else if(userGuess > randomNumber) {[m
+[32m+[m[32m          lowOrHi.textContent = 'Last guess was too high!';[m
+[32m+[m[32m        }[m
+       }[m
+[31m-    }[m
+ [m
+[31m-    guessCount++;[m
+[31m-    guessField.value = '';[m
+[31m-    guessField.focus();[m
+[31m-  }[m
+[31m-  guessSubmit.addeventListener('click', checkGuess);[m
+[31m-[m
+[31m-  function setGameOver() {[m
+[31m-	  guessField.disabled = true;[m
+[31m-	  guessSubmit.disabled = true;[m
+[31m-	  resetButton = document.createElement('button');[m
+[31m-	  resetButton.textContent = 'Start new game';[m
+[31m-	  document.body.appendChild(resetButton);[m
+[31m-	  resetButton.addeventListener('click', resetGame);[m
+[31m-  }[m
+[31m-[m
+[31m-  function resetGame() {[m
+[31m-	  guessCount = 1;[m
+[31m-[m
+[31m-    const resetParas = document.querySelectorAll('.resultParas p');[m
+[31m-    for (const resetPara of resetParas) {[m
+[31m-      resetPara.textContent = '';[m
+[32m+[m[32m      guessCount++;[m
+[32m+[m[32m      guessField.value = '';[m
+[32m+[m[32m      guessField.focus();[m
+[32m+[m[32m    }[m
+[32m+[m[32m    guessSubmit.addEventListener('click', checkGuess);[m
+[32m+[m
+[32m+[m[32m    function setGameOver() {[m
+[32m+[m[32m      guessField.disabled = true;[m
+[32m+[m[32m      guessSubmit.disabled = true;[m
+[32m+[m[32m      resetButton = document.createElement('button');[m
+[32m+[m[32m      resetButton.textContent = 'Start new game';[m
+[32m+[m[32m      document.body.appendChild(resetButton);[m
+[32m+[m[32m      resetButton.addEventListener('click', resetGame);[m
+     }[m
+[31m-	  resetButton.parentNode.removeChild(resetButton);[m
+ [m
+[31m-	  guessField.disabled = false;[m
+[31m-	  guessSubmit.disabled = false;[m
+[31m-	  guessField.value = '';[m
+[31m-	  guessField.focus();[m
+[32m+[m[32m    function resetGame() {[m
+[32m+[m[32m      guessCount = 1;[m
+ [m
+[31m-	  lastResult.style.backgroundColor = 'white';[m
+[32m+[m[32m      const resetParas = document.querySelectorAll('.resultParas p');[m
+[32m+[m[32m      for (const resetPara of resetParas) {[m
+[32m+[m[32m        resetPara.textContent = '';[m
+[32m+[m[32m      }[m
+[32m+[m[32m      resetButton.parentNode.removeChild(resetButton);[m
+[32m+[m
+[32m+[m[32m      guessField.disabled = false;[m
+[32m+[m[32m      guessSubmit.disabled = false;[m
+[32m+[m[32m      guessField.value = '';[m
+[32m+[m[32m      guessField.focus();[m
+ [m
+[31m-	  randomNumber = Math.floor(Math.random()) + 1;[m
+[31m-  }[m
+[31m-</script>[m
+[31m-</html>[m
+[32m+[m[32m      lastResult.style.backgroundColor = 'white';[m
+[32m+[m
+[32m+[m[32m      randomNumber = Math.floor(Math.random()*100) + 1;[m
+[32m+[m[32m    }[m
+[32m+[m[32m  </script>[m
+[32m+[m[32m  </html>[m

@@ -29,13 +29,20 @@
     const names = ['Chris', 'Li Kang', 'Anne', 'Francesca', 'Mustafa', 'Tina', 'Bert', 'Jada']
     const para = document.createElement('p');
 
-    // Add your code here
+    function random(min, max){
+      return Math.floor(Math.random()*max) + min;
+    }
 
-    // Don't edit the code below here!
+    function chooseName(myArray, arrayMax){
+      para.textContent = myArray[random(0, arrayMax)];
+    }
 
     const section = document.querySelector('section');
 
     section.appendChild(para);
+
+    chooseName(names, names.length);
+
   </script>
 
 </html>
